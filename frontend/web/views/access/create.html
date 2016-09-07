@@ -1,0 +1,20 @@
+<div ng-controller="AccessCtrl" layout="column">
+    <mg-ajax path="/access" options="mgCreate">
+        <h2>Crear acceso</h2>
+        <form ng-submit="create.accept()">
+            <h2>{{create.model.name}}</h2>
+            <div layout="column">                    
+                <md-input-container class="md-block">
+                    <label>Id perfil</label>
+                    <input ng-model="create.model.profile_id">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Id modulo</label>
+                    <input ng-model="create.model.module_id">
+                </md-input-container>                    
+            </div>
+        </form>
+        <md-button class="md-raised md-primary" ng-click="create.accept()">Crear</md-button>
+        <md-button class="md-raised md-accent" ng-click="create.close()">Cancelar</md-button>
+    </mg-ajax>
+</div>

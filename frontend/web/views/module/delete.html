@@ -1,0 +1,51 @@
+<div ng-controller="ModuleCtrl" layout="column">
+    <mg-ajax path="/module/{{edit.params.id}}" options="mgEdit">
+        <mg-ajax path="/module/{{edit.params.id}}" options="mgDelete">
+            <md-content>
+                <md-toolbar class="filter md-theme-green">
+                    <h2>Borrar este modulo</h2>
+                </md-toolbar>
+                <div class="md-whiteframe-z1">
+                    <div layout="horizontal">
+                        <div flex>
+                            <form>
+                                <h4>{{edit.model.label}}</h4>
+                                <div layout="column">                                    
+                                    <md-input-container class="md-block">
+                                        <label>Icon</label>
+                                        <input disabled ng-model="edit.model.iconfa">
+                                    </md-input-container>
+                                    <md-input-container class="md-block">
+                                        <label>Nombre</label>
+                                        <input disabled ng-model="edit.model.label">
+                                    </md-input-container>
+                                    <md-input-container class="md-block">
+                                        <label>Descripcion</label>
+                                        <input disabled ng-model="edit.model.description">
+                                    </md-input-container>
+                                    <md-input-container class="md-block">
+                                        <label>Controlador</label>
+                                        <input disabled ng-model="edit.model.controller">
+                                    </md-input-container>            
+                                    <md-input-container class="md-block"> 
+                                        <md-checkbox disabled ng-model="edit.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
+                                            Activo
+                                        </md-checkbox>
+                                    </md-input-container>            
+                                    <md-input-container class="md-block">
+                                        <label>Tipo de modulo</label>
+                                        <input disabled ng-model="edit.model.type_id">
+                                    </md-input-container>
+                                </div>
+                                <div layout="horizontal" layout-align="end">
+                                    <md-button disabled class="md-theme-green" ng-click="delete.accept()">Borrar</md-button>
+                                    <md-button disabled class="md-theme-red" ng-click="delete.close()">Cancelar</md-button>
+                                </div>
+                            </form>
+                        </div>                        
+                    </div>
+                </div>
+            </md-content>
+        </mg-ajax>
+    </mg-ajax>
+</div>

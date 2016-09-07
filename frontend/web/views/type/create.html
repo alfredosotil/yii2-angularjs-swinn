@@ -1,0 +1,25 @@
+<div ng-controller="TypeCtrl" layout="column">
+    <mg-ajax path="/type" options="mgCreate">
+        <h2>Crear tipo</h2>
+        <form ng-submit="create.accept()">
+            <h2>{{create.model.name}}</h2>
+            <div layout="column">                    
+                <md-input-container class="md-block">
+                    <label>Nombre</label>
+                    <input ng-model="create.model.type">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Categoria</label>
+                    <input ng-model="create.model.category">
+                </md-input-container>                    
+                <md-input-container class="md-block"> 
+                    <md-checkbox ng-model="create.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
+                        Activo
+                    </md-checkbox>
+                </md-input-container>       
+            </div>
+        </form>
+        <md-button class="md-raised md-primary" ng-click="create.accept()">Crear</md-button>
+        <md-button class="md-raised md-accent" ng-click="create.close()">Cancelar</md-button>
+    </mg-ajax>
+</div>

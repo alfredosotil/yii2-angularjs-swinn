@@ -1,0 +1,64 @@
+<div ng-controller="UserCtrl" layout="column">
+    <mg-ajax path="/user" options="mgCreate">
+    <h2>Crear Usuario</h2>
+    <form ng-submit="create.accept()">
+        <h2>{{create.model.names}}</h2>
+        <div layout="column">                    
+            <md-input-container class="md-block">
+                <label>Nombres</label>
+                <input ng-model="create.model.names">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Apellidos</label>
+                <input ng-model="create.model.surnames">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Correo electronico</label>
+                <input ng-model="create.model.email">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Usuario</label>
+                <input ng-model="create.model.username">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Clave</label>
+                <input type="password" ng-model="create.model.password">
+            </md-input-container>
+            <md-input-container class="md-block"> 
+                <md-checkbox ng-model="create.model.active" aria-label="Activo">
+                    Activo
+                </md-checkbox>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <p>Sexo</p>
+                <md-radio-group ng-model="create.model.sex">
+                    <md-radio-button value="M" class="md-primary">Masculino</md-radio-button>
+                    <md-radio-button value="F">Femenino</md-radio-button>
+                </md-radio-group>                
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Pefil de usuario</label>
+                <input ng-model="create.model.profile_id">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Tipo de usuario</label>
+                <input ng-model="create.model.type_id">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Estado de usuario</label>
+                <input ng-model="create.model.state_id">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Llave de autenticacion</label>
+                <input ng-model="create.model.authKey">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Token de acceso</label>
+                <input ng-model="create.model.accessToken">
+            </md-input-container>            
+        </div>
+    </form>
+        <md-button class="md-raised md-primary" ng-click="create.accept()">Crear</md-button>
+        <md-button class="md-raised md-accent" ng-click="create.close()">Cancelar</md-button>
+</mg-ajax>
+</div>

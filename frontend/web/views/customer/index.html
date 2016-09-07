@@ -1,0 +1,18 @@
+<table class="highlight responsive-table" >
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Telefono</th>
+            <th>Correo</th>            
+            <th>Direccion</th>
+            <th>zip</th>
+        </tr>
+    </thead>
+    <tr ng-repeat="c in allCustomers">
+        <td>{{c.name}}</td>
+        <td>{{c.phone}}</td>
+        <td>{{c.email}}</td>        
+        <td>{{c.addressline1}}</td>
+        <td>{{c.zip.zipCode}}</td>
+    </tr>
+</table>

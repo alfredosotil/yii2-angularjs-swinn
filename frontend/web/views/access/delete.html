@@ -1,0 +1,34 @@
+<div ng-controller="AccessCtrl" layout="column">
+    <mg-ajax path="/access/{{edit.params.id}}" options="mgEdit">
+        <mg-ajax path="/access/{{edit.params.id}}" options="mgDelete">
+            <md-content>
+                <md-toolbar class="filter md-theme-green">
+                    <h2>Borrar acceso</h2>
+                </md-toolbar>
+                <div class="md-whiteframe-z1">
+                    <div layout="horizontal">
+                        <div flex>
+                            <form>
+                                <h4>{{edit.model.label}}</h4>
+                                <div layout="column">                                    
+                                    <md-input-container class="md-block">
+                                        <label>Id perfil</label>
+                                        <input ng-model="edit.model.profile_id">
+                                    </md-input-container>
+                                    <md-input-container class="md-block">
+                                        <label>Id modulo</label>
+                                        <input ng-model="edit.model.module_id">
+                                    </md-input-container> 
+                                </div>
+                                <div layout="horizontal" layout-align="end">
+                                    <md-button disabled class="md-theme-green" ng-click="delete.accept()">Borrar</md-button>
+                                    <md-button disabled class="md-theme-red" ng-click="delete.close()">Cancelar</md-button>
+                                </div>
+                            </form>
+                        </div>                        
+                    </div>
+                </div>
+            </md-content>
+        </mg-ajax>
+    </mg-ajax>
+</div>

@@ -1,0 +1,68 @@
+<div ng-controller="AccessCtrl" layout="column" ng-cloak>
+    <mg-ajax id="accessIndex" path="/access" options="mgIndex" ng-init="index.filter={page:0,recordsPerPage:1}">
+        <md-content>
+            <md-toolbar class="filter md-theme-green">
+                <form ng-submit="index.filter.page = 0; index.accept();">
+                    <div layout="horizontal">
+                        <div flex>
+                            <h3>Lista de accesos</h3>
+                            <md-input-container>
+                                <label>Buscar</label>
+                                <input class="long" ng-model="search.id">
+                            </md-input-container>
+<!--                            <md-text-float id="search" label="Search:" ng-model="index.filter.searchStr" class="long"> </md-text-float>-->
+
+                            <span ng-show="index.cachedModel" style="color: red">Tiene cache</span>
+
+                        </div>
+<!--                        <div layout="vertical" layout-align="center">
+                            <md-button class="md-button-raised md-button-colored" style="margin-right: 1em;" ng-click="angular.element('search').focus();" access="submit">Buscar</md-button>
+                        </div>-->
+                    </div>
+                </form>
+            </md-toolbar>
+            <div class="md-whiteframe-z1">
+                <div id="list-header" layout="horizontal" layout-align="bottom">
+                    <div flex>
+                        <a ng-href="#/access/create"><md-button class="md-button-raised md-theme-light" mg-save-cache="#accessIndex">Crear nuevo modulo</md-button></a>
+                    </div>
+
+                    <div flex layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                        <md-button ng-click="index.filter.page = 0;index.accept();" ng-disabled="index.filter.page == 0" class="md-button-raised md-theme-green">Primera pagina</md-button>
+                        <md-button ng-click="index.previousPage();" ng-disabled="index.filter.page <= 0" class="md-button-raised md-theme-red">Anterior</md-button>
+                        <md-button ng-click="index.nextPage();" ng-disabled="index.model.length != index.filter.recordsPerPage" class="md-button-raised md-theme-light-blue">Proximo</md-button>
+                    </div>
+
+                </div>
+                <!--{{index.model | json}}-->
+               <accordion accordion-popout close-others="true">
+                    <accordion-group ng-repeat="item in index.model | filter:search" is-open="accordionGroup.open">
+                        <accordion-heading>
+<!--                            <i class="material-icons">{{item.name}}</i>-->
+                            {{item.id}}
+                        </accordion-heading>
+                        <p>perfil: {{item.profile_id}}</p>
+                        <p>modulo: {{item.module_id}}</p>
+                        <md-button ng-href="#/access/edit/{{item.id}}">Editar</md-button>
+                        <md-button ng-href="#/access/delete/{{item.id}}">Borrar</md-button>
+                    </accordion-group>
+                </accordion>
+                <div id="list-bottom" layout="horizontal" layout-align="bottom">
+                    <div flex>
+                        <md-whiteframe class="md-whiteframe-4dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
+                            <span class="md-title">Pagina actual: {{index.filter.page + 1}}</span>
+                        </md-whiteframe>
+                    </div>
+
+                    <div flex layout="row" layout-sm="column" layout-align="end center" layout-wrap>
+                        <md-button ng-click="index.filter.page = 0;index.accept();" ng-disabled="index.filter.page == 0" class="md-button-raised md-theme-green">Primera pagina</md-button>
+                        <md-button ng-click="index.previousPage();" ng-disabled="index.filter.page <= 0" class="md-button-raised md-theme-red">Anterior</md-button>
+                        <md-button ng-click="index.nextPage();" ng-disabled="index.model.length != index.filter.recordsPerPage" class="md-button-raised md-theme-light-blue">Proximo</md-button>
+                    </div>
+                </div>                
+            </div>
+        </md-content>
+    </mg-ajax>
+</div>
+
+
