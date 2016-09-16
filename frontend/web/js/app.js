@@ -13,10 +13,11 @@ angular.module('myapp', [
     'ngAnimate',
     'mgCrud',
     'ngMaterial',
+//    'mgcrea.ngStrap',
     'controllers',
-    'services'
+    'services',
+    'directives'
 //    'myapp.filters',
-//    'myapp.directives',
 ])
         .config(function (mgHttpProvider) {
             mgHttpProvider.setDefaultConfig({url: 'http://localhost/yii2-angularjs-swinn/backend/web'});
@@ -36,14 +37,16 @@ angular.module('myapp', [
 //                    })
 //                    .dark();
         })
-        .config(['$routeProvider', function ($routeProvider) {
-                $routeProvider
+        .config(['$routeProvider', '$httpProvider', function (r, h) {
+                r
 //                        site
-                        .when('/', {templateUrl: 'views/site/index.html', controller: 'SiteCtrl'})
-                        .when('/index', {templateUrl: 'views/site/index.html', controller: 'SiteCtrl'})
-                        .when('/aboutus', {templateUrl: 'views/site/aboutus.html', controller: 'SiteCtrl'})
-                        .when('/services', {templateUrl: 'views/site/services.html', controller: 'SiteCtrl'})
-                        .when('/contact', {templateUrl: 'views/site/contact.html', controller: 'SiteCtrl'})
+                        .when('/', {templateUrl: 'views/site/index.html'})
+                        .when('/index', {templateUrl: 'views/site/index.html'})
+                        .when('/aboutus', {templateUrl: 'views/site/aboutus.html'})
+                        .when('/services', {templateUrl: 'views/site/services.html'})
+                        .when('/contact', {templateUrl: 'views/site/contact.html', controller: 'ContactController'})
+                        .when('/login', {templateUrl: 'views/site/login.html', controller: 'LoginController'})
+                        .when('/dashboard', {templateUrl: 'views/site/dashboard.html', controller: 'DashboardController'})
 //                        users
                         .when('/user', {templateUrl: 'views/user/list.html', controller: 'UserCtrl'})
                         .when('/user/edit/:id', {templateUrl: 'views/user/edit.html', controller: 'UserCtrl'})
@@ -75,7 +78,8 @@ angular.module('myapp', [
                         .when('/access/create', {templateUrl: 'views/access/create.html', controller: 'AccessCtrl'})
                         .when('/access/delete/:id', {templateUrl: 'views/access/delete.html', controller: 'AccessCtrl'})
 //                        
-                        .otherwise({redirectTo: 'views/site/index.html'});
+                        .otherwise({templateUrl: 'views/site/404.html'});
+                h.interceptors.push('authInterceptor');
             }]);
 
 

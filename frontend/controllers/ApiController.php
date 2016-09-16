@@ -4,20 +4,19 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\LoginForm;
-use common\models\ContactForm;
+use frontend\models\ContactForm;
 use yii\filters\ContentNegotiator;
 use yii\web\Response;
 use yii\filters\AccessControl;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
 
-class ApiController extends Controller
-{
+class ApiController extends Controller {
+
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors() {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
@@ -42,26 +41,39 @@ class ApiController extends Controller
         ];
         return $behaviors;
     }
-    public function actionLogin()
-    {
+
+    public function actionLogin() {
         $model = new LoginForm();
         if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->login()) {
-            return ['access_token' => Yii::$app->user->identity->getAuthKey()];
+            Yii::$app->session->set('accessToken', Yii::$app->getSecurity()->generatePasswordHash(Yii::$app->user->identity->password));
+            Yii::$app->session->set('username', Yii::$app->user->identity->username);
+            Yii::$app->session->set('password', Yii::$app->user->identity->password);
+            return ['access_token' => Yii::$app->session->get('accessToken')];
         } else {
             $model->validate();
             return $model;
         }
     }
-    public function actionDashboard()
-    {
+
+    public function actionLogout() {
+        $username = Yii::$app->session->get('username');
+        $accessToken = Yii::$app->session->get('accessToken');
+        $message = "La sesion ha sido destruida para el usuario $username, accessToken=$accessToken";
+        Yii::$app->session->destroy();
+        return ['message' => $message];
+    }
+
+    public function actionDashboard() {
         $response = [
             'username' => Yii::$app->user->identity->username,
-            'access_token' => Yii::$app->user->identity->getAuthKey(),
+            'access_token' => Yii::$app->session->get('accessToken'),
+//            'access_token' => Yii::$app->user->identity->password
+//            'access_token' => $hash,
         ];
         return $response;
     }
-    public function actionContact()
-    {
+
+    public function actionContact() {
         $model = new ContactForm();
         if ($model->load(Yii::$app->getRequest()->getBodyParams(), '') && $model->validate()) {
             if ($model->sendEmail(Yii::$app->params['adminEmail'])) {
@@ -85,4 +97,5 @@ class ApiController extends Controller
             return $model;
         }
     }
+
 }

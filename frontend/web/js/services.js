@@ -66,4 +66,23 @@ angular.module('services', ['ngResource'])
                     update: {method: "PUT"}
                 });
 
-            }]);
+            }])
+        .factory('authInterceptor', ["$q", "$window", "$location", function (q, w, l) {
+            return {
+                request: function (config) {
+                    if (w.sessionStorage.access_token) {
+//                        console.log("authInterceptorRequest");
+                        //HttpBearerAuth
+                        config.headers.Authorization = 'Bearer ' + w.sessionStorage.access_token;
+                    }
+                    return config;
+                },
+                responseError: function (rejection) {
+                    if (rejection.status === 401) {
+//                        console.log("authInterceptor");
+                        l.path('/login').replace();
+                    }
+                    return q.reject(rejection);
+                }
+            };
+        }]);

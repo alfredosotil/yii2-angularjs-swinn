@@ -18,14 +18,15 @@ class AppAsset extends AssetBundle
         'js/app.js',
         'js/controllers.js',
         'js/services.js',
-//        'js/directives.js',
+        'js/directives.js',
 //        'js/filters.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+//        'yii\bootstrap\BootstrapAsset',
+//        'yii\bootstrap\BootstrapPluginAsset',
         'frontend\assets\AngularAsset',
-        'frontend\assets\WavesAsset',
+//        'frontend\assets\WavesAsset',
         'frontend\assets\CrudAsset',
         'frontend\assets\MdbootstrapAsset',
     ];

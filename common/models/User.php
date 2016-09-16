@@ -27,21 +27,19 @@ use Yii;
  * @property State $state
  * @property Type $type
  */
-class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
-{
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'user';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['names', 'surnames', 'email', 'username', 'password', 'active', 'type_id', 'state_id', 'sex', 'profile_id'], 'required'],
             [['active', 'type_id', 'state_id', 'profile_id'], 'integer'],
@@ -58,8 +56,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => Yii::t('app', 'ID'),
             'names' => Yii::t('app', 'Names'),
@@ -81,32 +78,28 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdeas()
-    {
+    public function getIdeas() {
         return $this->hasMany(Ideas::className(), ['user_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProfile()
-    {
+    public function getProfile() {
         return $this->hasOne(Profile::className(), ['id' => 'profile_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getState()
-    {
+    public function getState() {
         return $this->hasOne(State::className(), ['id' => 'state_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getType()
-    {
+    public function getType() {
         return $this->hasOne(Type::className(), ['id' => 'type_id']);
     }
 
@@ -114,29 +107,54 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      * @inheritdoc
      * @return UserQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new UserQuery(get_called_class());
     }
 
+    public static function findByUsername($username) {
+        $user = User::find()
+                ->where("active=:active", ["active" => 1])
+                ->andWhere("username=:username", [":username" => $username])
+                ->one();
+        if ($user) {
+            return new static($user);
+        }
+        return null;
+    }
+
     public function getAuthKey() {
-        
+        return $this->authKey;
     }
 
     public function getId() {
-        
+        return $this->id;
     }
 
     public function validateAuthKey($authKey) {
-        
+        return $this->authKey === $authKey;
+    }
+
+    public function validatePassword($password) {
+        return $this->password === $password;
     }
 
     public static function findIdentity($id) {
-        
+        $user = User::find()
+                ->where("active=:active", [":active" => 1])
+                ->andWhere("id=:id", ["id" => $id])
+                ->one();
+        return isset($user) ? new static($user) : null;
     }
 
     public static function findIdentityByAccessToken($token, $type = null) {
-        
+        if (Yii::$app->session->get('accessToken') === $token) {
+            return static::findOne([
+                        'username' => Yii::$app->session->get('username'),
+                        'password' => Yii::$app->session->get('password'),
+                        'active' => 1]);
+        }
+        return null;
+//        return static::findOne(['password' => $token]);
     }
 
 }

@@ -1,0 +1,34 @@
+<h1>Inicio de Sesion</h1>
+
+<p>Por favor llenar los campos para iniciar sesion:</p>
+
+<div class="row">
+    <div class="col-lg-5">
+        <form ng-submit="login()" name="loginForm" id="login-form" method="post" role="form" autocomplete="off">
+            <div ng-class="{ 'has-success': !error['username'] && submitted,
+                'text-danger': error['username'] && submitted }"
+                 class="md-form animated fadeInRightBig">
+                <!--<i class="fa fa-user prefix"></i>-->
+                <input ng-model="loginModel.username" type="text" id="loginform-username" class="form-control" value="">
+                <label class="" for="loginform-username">Usuario</label>
+                <p class="help-block help-block-error">{{ error['username']}}</p>
+            </div>
+            <div ng-class="{ 'has-success': !error['password'] && submitted,
+                'text-danger': error['password'] && submitted }"
+                 class="md-form animated fadeInRightBig" style="-webkit-animation-delay: 200ms;-moz-animation-delay: 200ms;">
+                <!--<i class="fa fa-key prefix"></i>-->
+                <input ng-model="loginModel.password" type="password" id="loginform-password" class="form-control" value="">
+                <label class="" for="loginform-password">Clave</label>
+                <p class="help-block help-block-error">{{ error['password']}}</p>
+            </div>            
+            <div class="md-form animated fadeInRightBig" style="-webkit-animation-delay: 400ms;-moz-animation-delay: 400ms;">
+                <md-checkbox ng-model="loginModel.rememberMe" id="loginform-rememberme" aria-label="recuerdame...">   
+                    recuerdame...
+                </md-checkbox>
+            </div>
+            <div class="md-form animated fadeInRightBig" style="-webkit-animation-delay: 600ms;-moz-animation-delay: 600ms;">
+                <button type="submit" class="btn btn-primary" name="login-button">Iniciar Sesion</button>
+            </div>
+        </form>
+    </div>
+</div>
