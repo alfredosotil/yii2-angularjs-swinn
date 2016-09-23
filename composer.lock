@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb2c98bf0090b2e1c3f51ef442b3ab83",
-    "content-hash": "9ee9a31cc8366461f3c1ec46ca1af295",
+    "hash": "5a6c37099b86b70bd616741836cf0bfa",
+    "content-hash": "43144a6f1cdbfea10ec428138f5c2209",
     "packages": [
         {
             "name": "bower-asset/angular",
@@ -112,6 +112,55 @@
             },
             "license": [
                 "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/angular-material-icons",
+            "version": "v0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/klarsys/angular-material-icons.git",
+                "reference": "ccca7a83c11971e30042bdf560749fcc4378b2c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/klarsys/angular-material-icons/zipball/ccca7a83c11971e30042bdf560749fcc4378b2c3",
+                "reference": "ccca7a83c11971e30042bdf560749fcc4378b2c3",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/angular": ">1.3.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "angular-material-icons.min.js",
+                    "angular-material-icons.css"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "description": "AngularJS directive to use Material Design icons with custom fill color and size.",
+            "keywords": [
+                "angular",
+                "color",
+                "custom",
+                "design",
+                "fill",
+                "icon",
+                "material",
+                "morph",
+                "size",
+                "svg",
+                "white"
             ]
         },
         {
@@ -398,43 +447,6 @@
             }
         },
         {
-            "name": "bower-asset/waves",
-            "version": "v0.7.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/fians/Waves.git",
-                "reference": "5ce37da75c9e1c41b0344afd4a8dd6eea92424e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/fians/Waves/zipball/5ce37da75c9e1c41b0344afd4a8dd6eea92424e7",
-                "reference": "5ce37da75c9e1c41b0344afd4a8dd6eea92424e7",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "dist/waves.min.js",
-                    "dist/waves.min.css"
-                ],
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests"
-                ]
-            },
-            "license": [
-                "MIT"
-            ],
-            "description": "Click effect inspired by Google's Material Design",
-            "keywords": [
-                "click",
-                "material-design"
-            ]
-        },
-        {
             "name": "bower-asset/yii2-pjax",
             "version": "v2.0.6",
             "source": {
@@ -470,16 +482,16 @@
         },
         {
             "name": "cebe/markdown",
-            "version": "1.1.0",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cebe/markdown.git",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2"
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cebe/markdown/zipball/54a2c49de31cc44e864ebf0500a35ef21d0010b2",
-                "reference": "54a2c49de31cc44e864ebf0500a35ef21d0010b2",
+                "url": "https://api.github.com/repos/cebe/markdown/zipball/c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
+                "reference": "c30eb5e01fe021cc5bba2f9ee0eeef96d4931166",
                 "shasum": ""
             },
             "require": {
@@ -526,7 +538,7 @@
                 "markdown",
                 "markdown-extra"
             ],
-            "time": "2015-03-06 05:28:07"
+            "time": "2016-09-14 20:40:20"
         },
         {
             "name": "ezyang/htmlpurifier",
@@ -818,21 +830,21 @@
         },
         {
             "name": "yiisoft/yii2-swiftmailer",
-            "version": "2.0.5",
+            "version": "2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-swiftmailer.git",
-                "reference": "e2c6315caff30a9271a7afad4d684627721dc69a"
+                "reference": "26b900767f1031ff3a4668dfa36c10595875f0a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/e2c6315caff30a9271a7afad4d684627721dc69a",
-                "reference": "e2c6315caff30a9271a7afad4d684627721dc69a",
+                "url": "https://api.github.com/repos/yiisoft/yii2-swiftmailer/zipball/26b900767f1031ff3a4668dfa36c10595875f0a5",
+                "reference": "26b900767f1031ff3a4668dfa36c10595875f0a5",
                 "shasum": ""
             },
             "require": {
                 "swiftmailer/swiftmailer": "~5.0",
-                "yiisoft/yii2": ">=2.0.4"
+                "yiisoft/yii2": "~2.0.4"
             },
             "type": "yii2-extension",
             "extra": {
@@ -864,7 +876,7 @@
                 "swiftmailer",
                 "yii2"
             ],
-            "time": "2016-03-17 03:58:49"
+            "time": "2016-09-09 11:48:11"
         }
     ],
     "packages-dev": [

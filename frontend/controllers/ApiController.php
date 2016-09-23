@@ -10,6 +10,7 @@ use yii\web\Response;
 use yii\filters\AccessControl;
 use yii\rest\Controller;
 use yii\filters\auth\HttpBearerAuth;
+use frontend\assets\AppAsset;
 
 class ApiController extends Controller {
 
@@ -64,9 +65,13 @@ class ApiController extends Controller {
     }
 
     public function actionDashboard() {
+//        $test = Yii::$app->db->createCommand('SELECT * FROM user')
+//            ->queryAll();
         $response = [
             'username' => Yii::$app->user->identity->username,
             'access_token' => Yii::$app->session->get('accessToken'),
+            'menu' => AppAsset::menuDashboard(),
+//            'menu' => count($test),
 //            'access_token' => Yii::$app->user->identity->password
 //            'access_token' => $hash,
         ];

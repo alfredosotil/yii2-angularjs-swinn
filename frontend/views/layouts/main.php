@@ -23,136 +23,253 @@ AppAsset::register($this);
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     </head>
-    <body  ng-controller="SiteCtrl" style="margin-top: 55px;height: auto;">
+    <body  ng-controller="SiteCtrl" class="fixed-sn mdb-skin">
         <?php $this->beginBody() ?>
-        <!--    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="menuOperation">
-                <md-toolbar class="md-theme-light">
-                    <h1 class="md-toolbar-tools">Sidenav Right</h1>
-        
-                </md-toolbar>
-                <md-content flex layout-padding>
-                    <md-button ng-click="close()" class="md-primary">
-                        Close Sidenav Right
-                    </md-button>
-                    <md-list>
-                        <md-list-item ng-repeat="item in menuModules" md-ink-ripple="#3F51B5" class="pointer">
-        
-                            <md-menu-link>
-                                <md-icon aria-label="{{item.label}}" class="material-icons">{{item.iconfa}}</md-icon>                            
-                                <a ng-click="select(item)" ng-class="{active: isActive(item)}" ng-href="{{'#/' + item.controller}}">{{item.label}}</a>
-                            </md-menu-link>
-                        </md-list-item>
-                    </md-list>            
-                </md-content>
-            </md-sidenav>
-            <md-content flex layout-padding>
-                <div layout="column" layout-align="top left">
-                    <div>
-                        <md-button ng-click="toggleMenu()" ng-hide="isOpenMenu()" class="md-icon-button">
-                            <md-icon md-menu-origin class="material-icons">menu</md-icon>
-                        </md-button>
-                     <a class="btn-floating btn-large waves-effect waves-light red"  ><i class="material-icons">add</i></a>
-                                        <md-button ng-click="toggleMenu()" ng-hide="isOpenMenu()" class="md-primary md-raised">
-                                            Toggle right
-                                        </md-button>
+        <!--Double navigation-->
+        <header>
+            <!-- Sidebar navigation -->
+            <ul id="slide-out" class="side-nav fixed custom-scrollbar">
+                <!-- Logo -->
+                <li>
+                    <div class="logo-wrapper waves-light">
+                        <a href="#"><img src="http://mdbootstrap.com/wp-content/uploads/2015/12/mdb-white2.png" class="img-fluid flex-center"></a>
                     </div>
-                </div>
-            </md-content>-->
-        <nav class="navbar navbar-fixed-top bg-faded navbar-dark secondary-color-dark">
-            <!--Collapse button-->
-            <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2"><i class="fa fa-bars"></i></button>
-
-            <div class="container">
-                <!--Collapse content-->
-                <div class="collapse navbar-toggleable-xs" id="collapseEx2">
-                    <!--Navbar Brand-->
-                    <a class="navbar-brand" href="#/">SwInn</a>
-                    <!--Links-->
-                    <ul class="nav navbar-nav">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#/index">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#/aboutus">Nosotros</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#/services">Servicios</a>
-                        </li>                
-                        <li class="nav-item">
-                            <a class="nav-link" href="#/contact">Contacto</a>
-                        </li>  
-                        <li class="nav-item pull-right" ng-hide="loggedIn()">
-                            <a class="nav-link" href="#/login">Iniciar Sesion</a>
-                        </li>    
+                </li>
+                <!--/. Logo -->
+                <!--Social-->
+                <li>
+                    <ul class="social">
+                        <li><a class="icons-sm fb-ic"><i class="fa fa-facebook"> </i></a></li>
+                        <li><a class="icons-sm pin-ic"><i class="fa fa-pinterest"> </i></a></li>
+                        <li><a class="icons-sm gplus-ic"><i class="fa fa-google-plus"> </i></a></li>
+                        <li><a class="icons-sm tw-ic"><i class="fa fa-twitter"> </i></a></li>
                     </ul>
-<!--                    <md-fab-speed-dial md-open="false" md-direction="down" class="md-fling">
-                        <md-fab-trigger>
-                            <md-button aria-label="menu" class="md-fab md-warn material-icons">
-                                <md-icon>menu</md-icon>
-                            </md-button>
-                        </md-fab-trigger>
-                        <md-fab-actions>
-                            <md-button aria-label="Twitter" class="md-fab md-raised md-mini">
-                                <md-icon class="material-icons" aria-label="Twitter">accessibility</md-icon>
-                            </md-button>
-                            <md-button aria-label="Facebook" class="md-fab md-raised md-mini">
-                                <md-icon class="material-icons" aria-label="Facebook">facebook</md-icon>
-                            </md-button>
-                            <md-button aria-label="Google Hangout" class="md-fab md-raised md-mini">
-                                <md-icon class="material-icons" aria-label="Google Hangout">hangout</md-icon>
-                            </md-button>
-                        </md-fab-actions>
-                    </md-fab-speed-dial>-->
-                    <ul class="nav navbar-nav pull-right" ng-show="loggedIn()">
-                        <li class="nav-item">
+                </li>
+                <!--/Social-->
 
+                <!--Search Form-->
+                <li>
+                    <form class="search-form" role="search">
+                        <div class="form-group waves-light">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                    </form>
+                </li>
+                <!--/.Search Form-->
+
+                <!-- Side navigation links -->
+                <li>
+                    <ul class="collapsible">
+                        <li>
+                            <a class="waves-effect" href="#/dashboard"><i class="fa fa-tachometer"></i> Dashboard</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-user"></i></a>
-                            <div class="dropdown-menu dropdown-secondary" aria-labelledby="dropdownMenu1" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                                <a class="dropdown-item waves-effect waves-light" href="#/dashboard"><i class="fa fa-tachometer"></i>  Dashboard</a>
-                                <a class="dropdown-item waves-effect waves-light" href="#/settings"><i class="fa fa-sliders"></i>  Configuracion</a>
-                                <a class="dropdown-item waves-effect waves-light" href="" ng-click="logout()"><i class="fa fa-sign-out"></i>  Salir</a>
+                        <li ng-repeat="tp in menu">
+                            <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-chevron-right"></i> {{tp.typeModule.type}}<i class="fa fa-angle-down rotate-icon"></i></a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li ng-repeat="m in tp.modules">
+                                        <a href="#/{{m.controller}}" class="waves-effect"><i class="fa {{m.iconfa}}"></i> {{m.label}}</a>
+                                    </li>
+                                </ul>
                             </div>
                         </li>
+                        <!--                        <li>
+                                                    <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i> Instruction<i class="fa fa-angle-down rotate-icon"></i></a>
+                                                    <div class="collapsible-body">
+                                                        <ul>
+                                                            <li><a href="#" class="waves-effect">For bloggers</a>
+                                                            </li>
+                                                            <li><a href="#" class="waves-effect">For authors</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-eye"></i> About<i class="fa fa-angle-down rotate-icon"></i></a>
+                                                    <div class="collapsible-body">
+                                                        <ul>
+                                                            <li><a href="#" class="waves-effect">Introduction</a>
+                                                            </li>
+                                                            <li><a href="#" class="waves-effect">Monthly meetings</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                                <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope-o"></i> Contact me<i class="fa fa-angle-down rotate-icon"></i></a>
+                                                    <div class="collapsible-body">
+                                                        <ul>
+                                                            <li><a href="#" class="waves-effect">FAQ</a>
+                                                            </li>
+                                                            <li><a href="#" class="waves-effect">Write a message</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>-->
                     </ul>
+                </li>
+                <!--/. Side navigation links -->
+
+            </ul>
+            <!--/. Sidebar navigation -->
+
+            <!--Navbar-->
+            <nav class="navbar navbar-fixed-top scrolling-navbar double-nav">
+
+                <!-- SideNav slide-out button -->
+                <div class="pull-left" ng-show="loggedIn()">
+                    <button data-activates="slide-out" class="navbar-toggler button-collapse"><i class="fa fa-bars"></i></button>
+                </div>
+
+                <!--Collapse button-->
+                <div class="pull-right">
+                    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#collapseEx2"><i class="fa fa-bars"></i></button>
+                </div>
+                <div class="container">
+                    <!--Collapse content-->
+                    <div class="collapse navbar-toggleable-xs" id="collapseEx2">
+                        <!-- Breadcrumb-->
+                        <a class="" href="#/">
+                            <div class="navbar-brand">
+                                <h2>SwInn</h2>
+                            </div>
+                        </a>
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="nav-item text-center">
+                                <a class="nav-link" href="#/index">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#/aboutus">Nosotros</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#/services">Servicios</a>
+                            </li>                
+                            <li class="nav-item">
+                                <a class="nav-link" href="#/contact">Contacto</a>
+                            </li>  
+                            <li class="nav-item pull-right" ng-hide="loggedIn()">
+                                <a class="nav-link" href="#/login"><i class="fa fa-sign-in" aria-hidden="false"></i><span class="hidden-sm-down"> Iniciar Sesion</span></a>
+                            </li>   
+                            <li class="nav-item pull-right" ng-show="loggedIn()">
+                                <a class="nav-link" href="" ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="false"></i><span class="hidden-sm-down"> Salir</span></a>
+                            </li>   
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!--/.Navbar-->
+        </header>
+        <!--/Double navigation-->
+        <!--Main layout-->
+        <main>
+            <div class="container-fluid" ng-view>
+            </div>
+        </main>
+        <!--/Main layout-->
+        <!--Footer-->
+        <footer class="page-footer center-on-small-only">
+
+            <!--Footer Links-->
+            <div class="container-fluid">
+                <div class="row">
+
+                    <!--First column-->
+                    <div class="col-md-3 col-md-offset-1">
+                        <h5 class="title">Footer Content</h5>
+                        <p>Here you can use rows and columns here to organize your footer content.</p>
+                    </div>
+                    <!--/.First column-->
+
+                    <hr class="hidden-md-up">
+
+                    <!--Second column-->
+                    <div class="col-md-2 col-md-offset-1">
+                        <h5 class="title">Links</h5>
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+                            <li><a href="#!">Link 2</a></li>
+                            <li><a href="#!">Link 3</a></li>
+                            <li><a href="#!">Link 4</a></li>
+                        </ul>
+                    </div>
+                    <!--/.Second column-->
+
+                    <hr class="hidden-md-up">
+
+                    <!--Third column-->
+                    <div class="col-md-2">
+                        <h5 class="title">Links</h5>
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+                            <li><a href="#!">Link 2</a></li>
+                            <li><a href="#!">Link 3</a></li>
+                            <li><a href="#!">Link 4</a></li>
+                        </ul>
+                    </div>
+                    <!--/.Third column-->
+
+                    <hr class="hidden-md-up">
+
+                    <!--Fourth column-->
+                    <div class="col-md-2">
+                        <h5 class="title">Links</h5>
+                        <ul>
+                            <li><a href="#!">Link 1</a></li>
+                            <li><a href="#!">Link 2</a></li>
+                            <li><a href="#!">Link 3</a></li>
+                            <li><a href="#!">Link 4</a></li>
+                        </ul>
+                    </div>
+                    <!--/.Fourth column-->
+
                 </div>
             </div>
-        </nav>
+            <!--/.Footer Links-->
 
-        <!--/.Navbar blue-->
-        <!--    <nav class="">
-                <div class="nav-wrapper">
-                    <a class="brand-logo" href="#/">Swinn</a>
-                    <a href="#" data-activates="mobile-nav" class="button-collapse"></a>
-                    <ul class="right hide-on-med-and-down">
-                        <li ng-class="{ active: isActive('/index')}"><a href="#/index">Inicio</a></li>
-                        <li ng-class="{ active: isActive('/aboutus')}"><a href="#/aboutus">Nosotros</a></li>
-                        <li ng-class="{ active: isActive('/services')}"><a href="#/services">Servicios</a></li>
-                        <li ng-class="{ active: isActive('/contact')}"><a href="#/contact">Contacto</a></li>
-                        <li ng-class="{ active: isActive('/login')}"><a href="#/login">Iniciar Sesion</a></li>
-                    </ul>
-                                            <ul class="side-nav" id="mobile-nav" ng-controller="SiteCtrl">
-                                                <li ng-class="{active: isActive('/')}"><a href="#/">Inicio</a></li>
-                                                <li ng-class="{active: isActive('/user')}"><a href="#/user">Usuarios</a></li>
-                                                <li ng-class="{active: isActive('/customers')}"><a href="#/customers">clientes</a></li>
-                                                <li ng-class="{active: isActive('/services')}"><a href="#/services">Servicios</a></li>
-                                                <li ng-class="{active: isActive('/contact')}"><a href="#/contact">Contacto</a></li>
-                            
-                                            </ul>
+            <hr>
+
+            <!--Call to action-->
+            <div class="call-to-action">
+                <ul>
+                    <li>
+                        <h5>Register for free</h5></li>
+                    <li><a href="" class="btn btn-danger">Sign up!</a></li>
+                </ul>
+            </div>
+            <!--/.Call to action-->
+
+            <hr>
+
+            <!--Social buttons-->
+            <div class="social-section">
+                <ul>
+                    <li><a class="btn-floating btn-small btn-fb"><i class="fa fa-facebook"> </i></a></li>
+                    <li><a class="btn-floating btn-small btn-tw"><i class="fa fa-twitter"> </i></a></li>
+                    <li><a class="btn-floating btn-small btn-gplus"><i class="fa fa-google-plus"> </i></a></li>
+                    <li><a class="btn-floating btn-small btn-li"><i class="fa fa-linkedin"> </i></a></li>
+                    <li><a class="btn-floating btn-small btn-git"><i class="fa fa-github"> </i></a></li>
+                    <li><a class="btn-floating btn-small btn-pin"><i class="fa fa-pinterest"> </i></a></li>
+                    <li><a class="btn-floating btn-small btn-ins"><i class="fa fa-instagram"> </i></a></li>
+                </ul>
+            </div>
+            <!--/.Social buttons-->
+
+            <!--Copyright-->
+            <div class="footer-copyright">
+                <div class="container-fluid">
+                    <p class="pull-left">&copy; Rubik Cube Ideas - better solutions <?= date('Y') ?></p><a href=""> www.rubikcubeideas.com </a>
+                    <p class="pull-right"><?= Yii::powered() ?></p>
                 </div>
-            </nav>-->
-        <div class="container">
-            <div ng-view>
             </div>
-        </div>    
-        <footer class="footer">
-            <div class="container">
-                <p class="pull-left">&copy; Rubik Cube Ideas - better solutions <?= date('Y') ?></p>
+            <!--/.Copyright-->
 
-                <p class="pull-right"><?= Yii::powered() ?></p>
-            </div>
         </footer>
+        <!--/.Footer-->
+        <!--        <footer class="footer">
+                    <div class="container">
+                        <p class="pull-left">&copy; Rubik Cube Ideas - better solutions <?= date('Y') ?></p>
+        
+                        <p class="pull-right"><?= Yii::powered() ?></p>
+                    </div>
+                </footer>-->
 
         <?php $this->endBody() ?>
     </body>

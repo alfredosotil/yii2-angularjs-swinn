@@ -7,106 +7,25 @@
 
 angular.module('controllers', [])
         .controller('SiteCtrl', ["moduleService", "$scope", "$http", "$window", "$location", "$mdSidenav", "$log", "$timeout", function (moduleService, s, h, w, l, m, log, t) {
-//                s.pageClass = 'page-home';
-//                s.toggleSidenav = function () {
-//                    return m('left').toggle();
-//                };  
-                s.loggedIn = function () {
-                    return Boolean(w.sessionStorage.access_token);
-                };
-                s.logout = function () {
-                    delete w.sessionStorage.access_token;
-                    h.get('api/logout').success(function (data) {
-                        s.info = data;
-                        log.debug(s.info.message);
+                if (l.path() === '/login') {
+                    if (w.sessionStorage.getItem("access_token") !== null) {
+                        l.path('/dashboard').replace();
+                    }
+                }
+
+                if (l.path() === '/dashboard') {
+                    h.get('api/dashboard').success(function (data) {
+                        s.dashboard = data;
+                        s.$parent.menu = data.menu;
+                        setTimeout(function () {
+                            $(".collapsible").collapsible();
+                            log.debug("collapsible");
+                        }, 2000);
                     });
+                }
+                s.pageClass = 'page-home';
+                s.captchaUrl = 'site/captcha';
 
-                    l.path('/login').replace();
-                };
-//                s.login = function () {
-//                    s.submitted = true;
-//                    s.error = {};
-////                    console.log(s.loginModel);
-//                    h.post('api/login', s.loginModel).success(
-//                            function (data) {
-//                                w.sessionStorage.access_token = data.access_token;
-//                                l.path('/dashboard').replace();
-//                            }).error(
-//                            function (data) {
-//                                angular.forEach(data, function (error) {
-//                                    s.error[error.field] = error.message;
-//                                });
-//                            }
-//                    );
-//                };
-//                http://www.tothenew.com/blog/angulars-resource-for-crud-operations/
-                s.menuModules = moduleService.query();
-//
-//                s.select = function (item) {
-//                    s.selected = item;
-//                };
-//                s.isActive = function (item) {
-//                    return s.selected === item;
-//                };
-//                s.toggleLeft = buildDelayedToggler('left');
-                s.toggleMenu = buildToggler('menuOperation');
-                s.isOpenMenu = function () {
-                    return m('menuOperation').isOpen();
-                };
-                s.close = function () {
-                    // Component lookup should always be available since we are not using `ng-if`
-                    m('menuOperation').close()
-                            .then(function () {
-                                log.debug("close menu is done");
-                            });
-                };
-                function debounce(func, wait, context) {
-                    var timer;
-
-                    return function debounced() {
-                        var context = s,
-                                args = Array.prototype.slice.call(arguments);
-                        t.cancel(timer);
-                        timer = t(function () {
-                            timer = undefined;
-                            func.apply(context, args);
-                        }, wait || 10);
-                    };
-                }
-                function buildDelayedToggler(navID) {
-                    return debounce(function () {
-                        // Component lookup should always be available since we are not using `ng-if`
-                        m(navID)
-                                .toggle()
-                                .then(function () {
-                                    log.debug("toggle " + navID + " is done");
-                                });
-                    }, 200);
-                }
-                function buildToggler(navID) {
-                    return function () {
-                        // Component lookup should always be available since we are not using `ng-if`
-                        m(navID)
-                                .toggle()
-                                .then(function () {
-                                    log.debug("toggle " + navID + " is done");
-                                });
-                    };
-                }
-
-            }])
-        .controller('DashboardController', ['$scope', '$http',
-            function (s, h) {
-                h.get('api/dashboard').success(function (data) {
-                    s.dashboard = data;
-                });
-            }
-        ])
-        .controller('LoginController', ['$scope', '$http', '$window', '$location',
-            function (s, h, w, l) {
-                if (w.sessionStorage.getItem("access_token") !== null) {
-                    l.path('/dashboard').replace();
-                }
                 s.login = function () {
                     s.submitted = true;
                     s.error = {};
@@ -122,11 +41,22 @@ angular.module('controllers', [])
                             }
                     );
                 };
-            }
-        ])
-        .controller('ContactController', ['$scope', '$http', '$window',
-            function (s, h, w) {
-                s.captchaUrl = 'site/captcha';
+
+                s.logout = function () {
+                    delete w.sessionStorage.access_token;
+                    s.$parent.menu = [];
+                    h.get('api/logout').success(function (data) {
+                        s.info = data;
+                        log.debug(s.info.message);
+                    });
+
+                    l.path('/index').replace();
+                };
+
+                s.loggedIn = function () {
+                    return Boolean(w.sessionStorage.access_token);
+                };
+
                 s.contact = function () {
                     s.submitted = true;
                     s.error = {};
@@ -151,17 +81,22 @@ angular.module('controllers', [])
                         s.captchaUrl = data.url;
                     });
                 };
+
+//                http://www.tothenew.com/blog/angulars-resource-for-crud-operations/
+//                s.menuModules = moduleService.query();
+
             }])
+//        .controller('DashboardController', ['$scope', '$http',
+//            function (s, h) {
+//                h.get('api/dashboard').success(function (data) {
+//                    s.dashboard = data;
+////                    s.dashboardMenu = s.dashboard.menu;
+//                });
+//            }
+//        ])
+
         .controller('UserCtrl', ["$scope", "$location", function (s, l) {
                 s.pageClass = 'page-home';
-                s.$watch('put.errorText', function (value) {
-                    console.log(value);
-                    angular.forEach(value, function (error) {
-                        s.error[error.field] = error.message;
-//                            scope.$apply();
-                        console.log(error.message);
-                    });
-                }, true);
             }])
         .controller('ModuleCtrl', ["$scope", "$location", function (s, l) {
                 s.pageClass = 'page-home';

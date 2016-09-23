@@ -20,7 +20,7 @@ class CrudAsset  extends AssetBundle{
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $js = [
-        'js/mgcrud.js',
+        'mgcrud/mgcrud.js',
     ];
     public $jsOptions = [
         'position' => View::POS_HEAD,

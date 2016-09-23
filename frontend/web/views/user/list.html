@@ -1,76 +1,38 @@
+
 <div layout="column" layout-margin layout-padding>
     <mg-ajax id="userIndex" path="/user" options="mgIndex" ng-init="index.filter={page:0,recordsPerPage:1}">
-        <md-content>
-            <md-toolbar class="filter md-theme-green">
-                <form ng-submit="index.filter.page = 0; index.accept();">
-                    <div layout="horizontal">
-                        <div flex>
-                            <h3>Lista de usuarios</h3>
-                            <md-input-container>
-                                <label>Buscar</label>
-                                <input class="long" ng-model="search.names">
-                            </md-input-container>
-                            <!--<input id="search" label="Search:" ng-model="index.filter.searchStr" class="long"> </input>-->
-
-                            <span ng-show="index.cachedModel" style="color: red">Tiene cache</span>
-
-                        </div>
-<!--                        <div layout="vertical" layout-align="center">
-                            <md-button class="md-button-raised md-button-colored" style="margin-right: 1em;" ng-click="angular.element('search').focus();" type="submit">Buscar</md-button>
-                        </div>-->
-                    </div>
-                </form>
-            </md-toolbar>
-            <div class="md-whiteframe-z1">
-                <div id="list-header" layout="horizontal" layout-align="bottom">
-                    <div flex>
-                        <a ng-href="#/user/create"><md-button class="md-button-raised md-theme-light" mg-save-cache="#userIndex">Crear nuevo usuario</md-button></a>
-                    </div>
-
-                    <div flex layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                        <md-button ng-click="index.filter.page = 0;index.accept();" ng-disabled="index.filter.page == 0" class="md-button-raised md-theme-green">Primera pagina</md-button>
-                        <md-button ng-click="index.previousPage();" ng-disabled="index.filter.page <= 0" class="md-button-raised md-theme-red">Anterior</md-button>
-                        <md-button ng-click="index.nextPage();" ng-disabled="index.model.length != index.filter.recordsPerPage" class="md-button-raised md-theme-light-blue">Proximo</md-button>
-                    </div>
-
-                </div>
-                <!--                {{index.model | json}}-->
-                <md-list>
-                    <md-item ng-repeat="item in index.model | filter:search">
-                        <md-item-content>
-                            <md-card>
-                                <md-card-title>
-                                    <md-card-title-text>
-                                        <span class="md-headline">{{item.names + ' ' + item.surnames}}</span>
-                                        <span class="md-subhead">{{item.email}}</span>
-                                    </md-card-title-text>
-                                    <md-card-title-media>
-                                        <div class="md-media-sm card-media"></div>
-                                    </md-card-title-media>
-                                </md-card-title>
-                                <md-card-actions layout="row" layout-align="end center">
-                                    <md-button ng-href="#/user/edit/{{item.id}}">Editar</md-button>
-                                    <md-button ng-href="#/user/delete/{{item.id}}">Borrar</md-button>
-                                </md-card-actions>
-                            </md-card>
-                        </md-item-content>
-                    </md-item>
-                </md-list>
-                <div id="list-bottom" layout="horizontal" layout-align="bottom">
-                    <div flex>
-                        <md-whiteframe class="md-whiteframe-4dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center">
-                            <span class="md-title">Pagina actual: {{index.filter.page + 1}}</span>
-                        </md-whiteframe>
-                    </div>
-
-                    <div flex layout="row" layout-sm="column" layout-align="end center" layout-wrap>
-                        <md-button ng-click="index.filter.page = 0;index.accept();" ng-disabled="index.filter.page == 0" class="md-button-raised md-theme-green">Primera pagina</md-button>
-                        <md-button ng-click="index.previousPage();" ng-disabled="index.filter.page <= 0" class="md-button-raised md-theme-red">Anterior</md-button>
-                        <md-button ng-click="index.nextPage();" ng-disabled="index.model.length != index.filter.recordsPerPage" class="md-button-raised md-theme-light-blue">Proximo</md-button>
-                    </div>
-                </div>                
-            </div>
-        </md-content>
+        <h2>Lista de usuarios</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th></th>
+                    <th>Primer nombre</th>
+                    <th>Apellidos</th>
+                    <th>Usuario</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in index.model| filter:search">
+                    <th scope="row">{{$index + 1}}</th>
+                    <td>
+                        <fieldset class="form-group">
+                            <input type="checkbox" id="checkbox{{item.id}}">
+                            <label for="checkbox{{item.id}}"></label>
+                        </fieldset>
+                    </td>
+                    <td>{{item.names}}</td>
+                    <td>{{item.surnames}}</td>
+                    <td>{{item.username}}</td>
+                    <td>
+                        <a href="" class="blue-text"><i class="fa fa-user"></i></a>
+                        <a href="#/user/edit/{{item.id}}" class="teal-text"><i class="fa fa-pencil"></i></a>
+                        <a href="#/user/delete/{{item.id}}" class="red-text"><i class="fa fa-times"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </mg-ajax>
 </div>
 

@@ -1,6 +1,10 @@
 html,
 body {
-    height: 100%;
+    height: auto;
+}
+
+.side-nav.fixed {
+ width: 300px;
 }
 
 .wrap {
@@ -101,9 +105,9 @@ a.desc:after {
 }
 
 @media(max-width:768px) {
-	.nav li > form {
-	    padding: 3px;
-	}
+    .nav li > form {
+        padding: 3px;
+    }
 }
 
 .nav > li > form > button:hover {

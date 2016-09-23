@@ -22,9 +22,10 @@
                 <p class="help-block help-block-error">{{ error['password']}}</p>
             </div>            
             <div class="md-form animated fadeInRightBig" style="-webkit-animation-delay: 400ms;-moz-animation-delay: 400ms;">
-                <md-checkbox ng-model="loginModel.rememberMe" id="loginform-rememberme" aria-label="recuerdame...">   
-                    recuerdame...
-                </md-checkbox>
+                <fieldset class="form-group">
+                    <input type="checkbox" ng-model="loginModel.rememberMe" id="loginform-rememberme" >
+                    <label for="loginform-rememberme">recuerdame...</label>
+                </fieldset>
             </div>
             <div class="md-form animated fadeInRightBig" style="-webkit-animation-delay: 600ms;-moz-animation-delay: 600ms;">
                 <button type="submit" class="btn btn-primary" name="login-button">Iniciar Sesion</button>

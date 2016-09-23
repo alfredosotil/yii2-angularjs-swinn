@@ -13,11 +13,10 @@ angular.module('myapp', [
     'ngAnimate',
     'mgCrud',
     'ngMaterial',
-//    'mgcrea.ngStrap',
+    'ngMdIcons',
     'controllers',
     'services',
     'directives'
-//    'myapp.filters',
 ])
         .config(function (mgHttpProvider) {
             mgHttpProvider.setDefaultConfig({url: 'http://localhost/yii2-angularjs-swinn/backend/web'});
@@ -40,13 +39,13 @@ angular.module('myapp', [
         .config(['$routeProvider', '$httpProvider', function (r, h) {
                 r
 //                        site
-                        .when('/', {templateUrl: 'views/site/index.html'})
-                        .when('/index', {templateUrl: 'views/site/index.html'})
-                        .when('/aboutus', {templateUrl: 'views/site/aboutus.html'})
-                        .when('/services', {templateUrl: 'views/site/services.html'})
-                        .when('/contact', {templateUrl: 'views/site/contact.html', controller: 'ContactController'})
-                        .when('/login', {templateUrl: 'views/site/login.html', controller: 'LoginController'})
-                        .when('/dashboard', {templateUrl: 'views/site/dashboard.html', controller: 'DashboardController'})
+                        .when('/', {templateUrl: 'views/site/index.html', controller: 'SiteCtrl'})
+                        .when('/index', {templateUrl: 'views/site/index.html', controller: 'SiteCtrl'})
+                        .when('/aboutus', {templateUrl: 'views/site/aboutus.html', controller: 'SiteCtrl'})
+                        .when('/services', {templateUrl: 'views/site/services.html', controller: 'SiteCtrl'})
+                        .when('/contact', {templateUrl: 'views/site/contact.html', controller: 'SiteCtrl'})
+                        .when('/login', {templateUrl: 'views/site/login.html', controller: 'SiteCtrl'})
+                        .when('/dashboard', {templateUrl: 'views/site/dashboard.html', controller: 'SiteCtrl'})
 //                        users
                         .when('/user', {templateUrl: 'views/user/list.html', controller: 'UserCtrl'})
                         .when('/user/edit/:id', {templateUrl: 'views/user/edit.html', controller: 'UserCtrl'})
@@ -80,6 +79,17 @@ angular.module('myapp', [
 //                        
                         .otherwise({templateUrl: 'views/site/404.html'});
                 h.interceptors.push('authInterceptor');
+            }])
+        .run([function () {
+                // Tooltips Initialization
+                $(function () {
+                    $('[data-toggle="tooltip"]').tooltip()
+                });
+                // SideNav init
+                $(".button-collapse").sideNav();
+                // Custom scrollbar init
+                var el = document.querySelector('.custom-scrollbar');
+                Ps.initialize(el);
             }]);
 
 

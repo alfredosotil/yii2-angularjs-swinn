@@ -23,17 +23,32 @@ angular.module('directives', [])
             return {
                 restrict: 'E',
                 scope: {
-                    error: "="
+                    value: "="
                 },
                 link: function (scope, element, attrs) {
-                    scope.$watch(attrs.value, function (value) {
-                        console.log(value);
-                        angular.forEach(value, function (error) {
-                            scope.error[error.field] = error.message;
+                    scope.$watch("value", function (value) {
+                        if (value !== null) {
+                            console.log(value);
+                            angular.forEach(value, function (error) {
+                                toastr.error(error.message, error.field, {timeOut: 10000, onclick: null})
+//                            scope.error[error.field] = error.message;
 //                            scope.$apply();
-                            console.log(error.message);
-                        });
+//                            console.log(error.message);
+                            });
+                        }
                     }, true);
                 }
             };
+        })
+        .directive('onFinishRender', function ($timeout) {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attr) {
+                    if (scope.$last === true) {
+                        $timeout(function () {
+                            scope.$emit(attr.onFinishRender);
+                        });
+                    }
+                }
+            }
         });
