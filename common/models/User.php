@@ -52,6 +52,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
             [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
         ];
     }
+    
+    public function extraFields() {
+        return ['profile', 'type', 'state'];
+    }
 
     /**
      * @inheritdoc
@@ -101,14 +105,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface {
      */
     public function getType() {
         return $this->hasOne(Type::className(), ['id' => 'type_id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return UserQuery the active query used by this AR class.
-     */
-    public static function find() {
-        return new UserQuery(get_called_class());
     }
 
     public static function findByUsername($username) {

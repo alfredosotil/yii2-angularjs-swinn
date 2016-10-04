@@ -32,7 +32,7 @@ class State extends \yii\db\ActiveRecord
         return [
             [['state', 'category', 'active'], 'required'],
             [['active'], 'integer'],
-            [['state', 'category'], 'string', 'max' => 45],
+            [['state', 'category'], 'string', 'max' => 45]
         ];
     }
 
@@ -42,10 +42,10 @@ class State extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'state' => Yii::t('app', 'State'),
-            'category' => Yii::t('app', 'Category'),
-            'active' => Yii::t('app', 'Active'),
+            'id' => 'ID',
+            'state' => 'Estado',
+            'category' => 'Categoria',
+            'active' => 'Activo',
         ];
     }
 
@@ -55,14 +55,5 @@ class State extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['state_id' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return StateQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new StateQuery(get_called_class());
     }
 }

@@ -1,53 +1,39 @@
 <div layout="column" layout-margin layout-padding>
     <mg-ajax path="/user/{{edit.params.id}}" options="mgEdit">
         <mg-ajax path="/user/{{edit.params.id}}" options="mgDelete">
-            <h2>Borrar este usuario</h2>
-            <div layout="column">
-                <form>
-                    <h2>{{edit.model.names}}</h2>
-                    <md-input-container class="md-block">
-                        <label>Nombres</label>
-                        <input disabled ng-model="edit.model.names">
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Apellidos</label>
-                        <input disabled ng-model="edit.model.surnames">
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Correo electronico</label>
-                        <input disabled ng-model="edit.model.email">
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Usuario</label>
-                        <input disabled ng-model="edit.model.username">
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Clave</label>
-                        <input disabled ng-model="edit.model.password">
-                    </md-input-container>
-                    <md-input-container class="md-block"> 
-                        <md-checkbox ng-disabled="true" ng-model="edit.model.active" ng-true-value="1"
-                                     ng-false-value="0" aria-label="Activo">
-                            Activo
-                        </md-checkbox>
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <p>Sexo</p>
-                        <md-radio-group ng-disabled="true" ng-model="edit.model.sex">
-                            <md-radio-button ng-disabled="true" value="M" class="md-primary">Masculino</md-radio-button>
-                            <md-radio-button ng-disabled="true" value="F">Femenino</md-radio-button>
-                        </md-radio-group>                
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Pefil de usuario</label>
-                        <input disabled ng-model="edit.model.profile_id">
-                    </md-input-container>
-                    <div layout="row" layout-align="end">
-                        <md-button class="md-theme-green" ng-click="delete.accept()">Borrar</md-button>
-                        <md-button class="md-theme-red" ng-click="delete.close()">Cancelar</md-button>
-                    </div>
-                </form>
-            </div>                        
+            <h1 class="display-4">Borrar Usuario {{edit.model.names}}</h1>
+            <form>
+                <md-input-container class="md-block">
+                    <label>Nombres</label>
+                    <input disabled ng-model="edit.model.names">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Apellidos</label>
+                    <input disabled ng-model="edit.model.surnames">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Correo electronico</label>
+                    <input disabled ng-model="edit.model.email">
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Usuario</label>
+                    <input disabled ng-model="edit.model.username">
+                </md-input-container>
+                <!--                <md-input-container class="md-block">
+                                    <label>Clave</label>
+                                    <input disabled ng-model="edit.model.password">
+                                </md-input-container>-->
+                <md-input-container class="md-block"> 
+                    <p>Activo?</p>
+                    <md-checkbox disabled class="md-primary" style="position:inherit;left:0px;visibility:visible;" ng-model="edit.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
+                        {{ edit.model.active ? 'Si':'No' }}
+                    </md-checkbox>  
+                </md-input-container>
+                <div class="md-form">
+                    <a ng-click="delete.accept()" class="btn btn-success-outline btn-lg btn-block waves-effect"><i class="fa fa-check-circle left"></i> Borrar</a>
+                    <a ng-click="delete.close()" class="btn btn-danger-outline btn-lg btn-block waves-effect"><i class="fa fa-times-circle left"></i> Cancelar</a>
+                </div>
+            </form>
         </mg-ajax>
     </mg-ajax>
 </div>

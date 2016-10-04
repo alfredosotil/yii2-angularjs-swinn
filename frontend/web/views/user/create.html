@@ -1,90 +1,80 @@
 <div layout="column" layout-margin layout-padding>
     <mg-ajax path="/user" options="mgCreate">
-        <h2>Crear Usuario</h2>
-        <!--<div class="md-whiteframe-z1">-->
-        <!--<div flex>-->
+        <h1 class="display-4">Crear Usuario {{create.model.names}}</h1>
         <form ng-submit="create.accept()">
-            <div layout="column">
-                <h2>{{create.model.names}}</h2>
-                <md-input-container>
-                    <label>Nombres</label>
-                    <input ng-model="create.model.names">
-                </md-input-container>
-                <md-input-container>
-                    <label>Apellidos</label>
-                    <input ng-model="create.model.surnames">
-                </md-input-container>
-                <md-input-container>
-                    <label>Correo electronico</label>
-                    <input ng-model="create.model.email">
-                </md-input-container>
-                <md-input-container>
-                    <label>Usuario</label>
-                    <input ng-model="create.model.username">
-                </md-input-container>
-                <md-input-container>
-                    <label>Clave</label>
-                    <input type="password" ng-model="create.model.password">
-                </md-input-container>
-                <md-input-container> 
-                    <md-checkbox ng-model="create.model.active" aria-label="Activo">
-                        Activo
-                    </md-checkbox>
-                </md-input-container>
-                <md-input-container>
-                    <p>Sexo</p>
-                    <md-radio-group ng-model="create.model.sex">
-                        <md-radio-button value="M" class="md-primary">Masculino</md-radio-button>
-                        <md-radio-button value="F">Femenino</md-radio-button>
-                    </md-radio-group>                
-                </md-input-container>
-                <md-input-container>
-                    <label>Pefil de usuario</label>
-                    <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/profile" value="profiles">
-                        <md-select ng-model="create.model.profile_id" placeholder="Pefil de usuario" required md-no-asterisk="false">
-                            <md-option ng-repeat="profile in profiles" value="{{profile.id}}">{{profile.name}}</md-option>
-                        </md-select>
-                    </ajax-get>
-                </md-input-container>
-                <md-input-container>
-                    <label>Tipo de usuario</label>
-                    <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/type" value="types">
-                        <md-select ng-model="create.model.type_id" placeholder="Tipo de usuario" required md-no-asterisk="false">
-                            <md-option ng-repeat="type in types" value="{{type.id}}">{{type.type}}</md-option>
-                        </md-select>
-                    </ajax-get>
-                </md-input-container>
-                <md-input-container>
-                    <label>Estado de usuario</label>
-                    <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/state" value="states">
-                        <md-select ng-model="create.model.state_id" placeholder="Estado de usuario" required md-no-asterisk="false">
-                            <md-option ng-repeat="state in states" value="{{state.id}}">{{state.state}}</md-option>
-                        </md-select>
-                    </ajax-get>
-                </md-input-container>
-                <md-input-container>
-                    <label>Llave de autenticacion</label>
-                    <input ng-model="create.model.authKey">
-                </md-input-container>
-                <md-input-container>
-                    <label>Token de acceso</label>
-                    <input ng-model="create.model.accessToken">
-                </md-input-container>            
-                <div class="text-danger" ng-show="create.errorText"> 
-                    <ul>
-                        <li ng-repeat="error in create.errorText">
-                            {{error.message}}
-                        </li>
-                    </ul>
-                </div>
-                <div layout="row" layout-align="end">
-                    <md-button class="md-raised md-primary" ng-click="create.accept()">Crear</md-button>
-                    <md-button class="md-raised md-warn md-hue-2" ng-click="create.close()">Cancelar</md-button>
-                </div>
+            <md-input-container class="md-block">
+                <input type="text" id="names" ng-model="create.model.names">
+                <label for="names">Nombres</label>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="text" id="surnames" ng-model="create.model.surnames">
+                <label for="surnames">Apellidos</label>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="email" id="email" ng-model="create.model.email">
+                <label for="email">Correo electronico</label>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="text" id="username" ng-model="create.model.username">
+                <label for="username">Usuario</label>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input id="password" type="password" ng-model="create.model.password">
+                <label for="password">Clave</label>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <p>Activo?</p>
+                <md-checkbox class="md-primary" style="position:inherit;left:0px;visibility:visible;" ng-model="create.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
+                    {{ create.model.active ? 'Si':'No' }}
+                </md-checkbox>                
+            </md-input-container>
+            <md-input-container class="md-block">
+                <p>Sexo</p>
+                <md-radio-group ng-model="create.model.sex">
+                    <md-radio-button value="M" class="md-primary">Masculino</md-radio-button>
+                    <md-radio-button value="F">Femenino</md-radio-button>
+                </md-radio-group>                
+            </md-input-container>
+            <md-input-container class="md-block">
+                <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/profile" value="profiles">
+                    <md-select ng-model="create.model.profile_id" placeholder="Perfil de Usuario" required md-no-asterisk="false">
+                        <md-option ng-repeat="profile in profiles" ng-value="profile.id">{{profile.name}}</md-option>
+                    </md-select>
+                </ajax-get>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/type" value="types">
+                    <md-select ng-model="create.model.type_id" placeholder="Tipo de usuario" required md-no-asterisk="false">
+                        <md-option ng-repeat="type in types" value="{{type.id}}">{{type.type}}</md-option>
+                    </md-select>
+                </ajax-get>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/state" value="states">
+                    <md-select ng-model="create.model.state_id" placeholder="Estado de usuario" required md-no-asterisk="false">
+                        <md-option ng-repeat="state in states" value="{{state.id}}">{{state.state}}</md-option>
+                    </md-select>
+                </ajax-get>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="text" id="authKey" ng-model="create.model.authKey">
+                <label for="authKey">Llave de autenticacion</label>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <input type="text" id="accessToken" ng-model="create.model.accessToken">
+                <label for="accessToken">Token de acceso</label>
+            </md-input-container>            
+            <div class="text-danger" ng-show="create.errorText"> 
+                <ul>
+                    <li ng-repeat="error in create.errorText">
+                        {{error.message}}
+                    </li>
+                </ul>
+            </div>
+            <div class="md-form">
+                <a ng-click="create.accept()" class="btn btn-success-outline btn-lg btn-block waves-effect"><i class="fa fa-check-circle left"></i> Crear</a>
+                <a ng-click="create.close()" class="btn btn-danger-outline btn-lg btn-block waves-effect"><i class="fa fa-times-circle left"></i> Cancelar</a>
             </div>
         </form>
-        <!--</div>-->
-
-        <!--</div>-->
     </mg-ajax>
 </div>

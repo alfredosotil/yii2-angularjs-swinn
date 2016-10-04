@@ -1,38 +1,123 @@
-
 <div layout="column" layout-margin layout-padding>
-    <mg-ajax id="userIndex" path="/user" options="mgIndex" ng-init="index.filter={page:0,recordsPerPage:1}">
-        <h2>Lista de usuarios</h2>
-        <table class="table">
-            <thead>
+    <mg-ajax id="userIndex" path="/user?expand=profile,type,state" options="mgIndex" mg-override="{show:true}" ng-init="index.filter={page:0,recordsPerPage:1}">
+        <h1 class="display-4">Lista de Usuarios</h1>
+        <span ng-show="index.cachedModel" class="text-danger">Tiene cache</span>
+        <a ng-href="#/user/create" mg-save-cache="#userIndex" class="btn btn-primary-outline btn-lg btn-block waves-effect"><i class="fa fa-plus-square left"></i> Crear nuevo</a>
+        <!--<div class="spinner" ng-show="index.show"></div>-->
+        <table class="table">            
+            <tbody>     
                 <tr>
-                    <th>#</th>
-                    <th></th>
-                    <th>Primer nombre</th>
-                    <th>Apellidos</th>
-                    <th>Usuario</th>
-                    <th>Acciones</th>
+                    <td>#</td>
+                    <!--<td></td>-->
+                    <td>
+                        <input type="text" placeholder="Nombre" id="names" class="blue-text" ng-model="search.names">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Apellidos" id="surnames" class="blue-text" ng-model="search.surnames">
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Usuario" id="username" class="blue-text" ng-model="search.username">
+                    </td>
+                    <td>Acciones</td>
                 </tr>
-            </thead>
-            <tbody>
                 <tr ng-repeat="item in index.model| filter:search">
                     <th scope="row">{{$index + 1}}</th>
-                    <td>
-                        <fieldset class="form-group">
-                            <input type="checkbox" id="checkbox{{item.id}}">
-                            <label for="checkbox{{item.id}}"></label>
-                        </fieldset>
-                    </td>
+                    <!--                <td>
+                                        <fieldset class="form-group">
+                                            <input type="checkbox" id="checkbox{{item.id}}">
+                                            <label for="checkbox{{item.id}}"></label>
+                                        </fieldset>
+                                    </td>-->
                     <td>{{item.names}}</td>
                     <td>{{item.surnames}}</td>
                     <td>{{item.username}}</td>
                     <td>
-                        <a href="" class="blue-text"><i class="fa fa-user"></i></a>
+                        <a href="" class="blue-text" ng-click="setModel(item)" data-toggle="modal" data-target=".bd-modal-lg"><i class="fa fa-eye"></i></a>
                         <a href="#/user/edit/{{item.id}}" class="teal-text"><i class="fa fa-pencil"></i></a>
-                        <a href="#/user/delete/{{item.id}}" class="red-text"><i class="fa fa-times"></i></a>
+                        <a href="#/user/delete/{{item.id}}" class="red-text"><i class="fa fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Informacion de usuario</h4>
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body container">
+                        <div class="row">
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Nombre</h5>
+                                    <p class="lead">{{dataModel.names}}</p>
+                                </blockquote>
+                            </div>
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Apellidos</h5>
+                                    <p class="lead">{{dataModel.surnames}}</p>
+                                </blockquote>                            
+                            </div>
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Correo electronico</h5>
+                                    <p class="lead">{{dataModel.email}}</p>
+                                </blockquote>                            
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Usuario</h5>
+                                    <p class="lead">{{dataModel.username}}</p>
+                                </blockquote>                            
+                            </div>
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Sexo</h5>
+                                    <p class="lead">{{dataModel.sex}}</p>
+                                </blockquote>                            
+                            </div>
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Activo</h5>
+                                    <p class="lead">{{dataModel.active ? 'Si':'No'}}</p>
+                                </blockquote>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Perfil de usuario</h5>
+                                    <p class="lead">{{dataModel.profile.name}}</p>
+                                </blockquote>
+                            </div>
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Tipo de usuario</h5>
+                                    <p class="lead">{{dataModel.type.type}}</p>
+                                </blockquote>                            
+                            </div>
+                            <div class="md-form col-lg-4">
+                                <blockquote class="blockquote bq-primary">
+                                    <h5 class="text-primary">Estado del usuario</h5>
+                                    <p class="lead">{{dataModel.state.state}}</p>
+                                </blockquote>                            
+                            </div>
+                        </div>
+                    </div>
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </mg-ajax>
 </div>
-

@@ -38,7 +38,12 @@ class Module extends \yii\db\ActiveRecord
             [['iconfa'], 'string', 'max' => 100],
             [['label', 'controller'], 'string', 'max' => 50],
             [['description'], 'string', 'max' => 500],
+            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_id' => 'id']],
         ];
+    }
+    
+    public function extraFields() {
+        return ['type'];
     }
 
     /**
@@ -47,13 +52,13 @@ class Module extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'iconfa' => Yii::t('app', 'Iconfa'),
-            'label' => Yii::t('app', 'Label'),
-            'description' => Yii::t('app', 'Description'),
-            'controller' => Yii::t('app', 'Controller'),
-            'active' => Yii::t('app', 'Active'),
-            'type_id' => Yii::t('app', 'Type ID'),
+            'id' => 'ID',
+            'iconfa' => 'Iconfa',
+            'label' => 'Label',
+            'description' => 'Descripcion',
+            'controller' => 'Controlador',
+            'active' => 'Activo',
+            'type_id' => 'Tipo ID',
         ];
     }
 
@@ -64,13 +69,11 @@ class Module extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Access::className(), ['module_id' => 'id']);
     }
-
+    
     /**
-     * @inheritdoc
-     * @return ModuleQuery the active query used by this AR class.
+     * @return \yii\db\ActiveQuery
      */
-    public static function find()
-    {
-        return new ModuleQuery(get_called_class());
+    public function getType() {
+        return $this->hasOne(Type::className(), ['id' => 'type_id']);
     }
 }

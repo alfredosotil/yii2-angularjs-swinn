@@ -13,7 +13,7 @@ class AngularAsset extends AssetBundle {
         'angular-material-icons/angular-material-icons.css',
     ]:[
         'angular-material/angular-material.min.css',
-        'angular-material-icons/angular-material-icons.css',
+        'angular-material-icons/angular-material-icons.min.css',
     ];
     public $js = YII_ENV_DEV ? [
         'angular/angular.js',

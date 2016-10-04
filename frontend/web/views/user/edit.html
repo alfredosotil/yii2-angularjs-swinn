@@ -1,84 +1,82 @@
 <div layout="column" layout-margin layout-padding>
     <mg-ajax path="/user/{{edit.params.id}}" options="mgEdit">
         <mg-ajax path="/user/{{edit.params.id}}" options="mgPut">
-            <h2>Editar datos usuario</h2>
+            <h1 class="display-4">Editar Usuario {{edit.model.names}}</h1>
+            <span ng-show="edit.cachedModel"  class="text-danger">Tiene cache</span>
             <form>
-                <h2>{{edit.model.names}}</h2>
-                <div layout="column">
-                    <md-input-container>
-                        <label>Nombres</label>
-                        <input ng-model="edit.model.names">
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Apellidos</label>
-                        <input ng-model="edit.model.surnames">
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Correo electronico</label>
-                        <input ng-model="edit.model.email">
-                    </md-input-container>
-                    <md-input-container ng-class="{
-                                        'has-success': !error['username'],
-                                                'text-danger'
-                                        : error['username'] }">
-                        <label>Usuario</label>
-                        <input ng-model="edit.model.username">
-                        <p class="help-block help-block-error">{{ error['username']}}</p>
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Clave</label>
-                        <input ng-model="edit.model.password">
-                    </md-input-container>
-                    <md-input-container> 
-                        <md-checkbox ng-model="edit.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
-                            Activo
-                        </md-checkbox>
-                    </md-input-container>
-                    <md-input-container>
-                        <p>Sexo</p>
-                        <md-radio-group ng-model="edit.model.sex">
-                            <md-radio-button value="M" class="md-primary">Masculino</md-radio-button>
-                            <md-radio-button value="F">Femenino</md-radio-button>
-                        </md-radio-group>                
-                    </md-input-container>
-                    <md-input-container>
-                        <label>Pefil de usuario</label>
-                        <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/profile" value="profiles">
-                            <md-select ng-model="edit.model.profile_id" placeholder="Pefil de usuario" required md-no-asterisk="false">
-                                <md-option ng-repeat="profile in profiles" value="{{profile.id}}">{{profile.name}}</md-option>
-                            </md-select>
-                        </ajax-get>
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Tipo de usuario</label>
-                        <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/type" value="types">
-                            <md-select ng-model="edit.model.type_id" placeholder="Tipo de usuario" required md-no-asterisk="false">
-                                <md-option ng-repeat="type in types" value="{{type.id}}">{{type.type}}</md-option>
-                            </md-select>
-                        </ajax-get>
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Estado de usuario</label>
-                        <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/state" value="states">
-                            <md-select ng-model="edit.model.state_id" placeholder="Estado de usuario" required md-no-asterisk="false">
-                                <md-option ng-repeat="state in states" value="{{state.id}}">{{state.state}}</md-option>
-                            </md-select>
-                        </ajax-get>
-                    </md-input-container>
-                    <div class="text-danger" ng-show="put.errorText"> 
-                        <ul>
-                            <li ng-repeat="error in put.errorText">
-                                {{error.message}}
-                            </li>
-                        </ul>
-                    </div>
-                    <div layout="row" layout-align="end">
-                        <md-button class="md-raised md-primary" ng-click="put.accept()">Actualizar</md-button>
-                        <md-button class="md-raised md-warn md-hue-2" ng-click="put.close()">Cancelar</md-button>
-                    </div>
+                <md-input-container class="md-block">
+                    <input type="text" id="names" ng-model="edit.model.names">
+                    <label for="names">Nombres</label>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input type="text" id="surnames" ng-model="edit.model.surnames">
+                    <label for="surnames">Apellidos</label>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input type="email" id="email" ng-model="edit.model.email">
+                    <label for="email">Correo electronico</label>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input type="text" id="username" ng-model="edit.model.username">
+                    <label for="username">Usuario</label>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input id="password" type="password" ng-model="edit.model.password">
+                    <label for="password">Clave</label>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <p>Activo?</p>
+                    <md-checkbox  class="md-primary" style="position:inherit;left:0px;visibility:visible;" ng-model="edit.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
+                        {{ edit.model.active ? 'Si':'No' }}
+                    </md-checkbox>                
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <p>Sexo</p>
+                    <md-radio-group ng-model="edit.model.sex">
+                        <md-radio-button value="M" class="md-primary">Masculino</md-radio-button>
+                        <md-radio-button value="F">Femenino</md-radio-button>
+                    </md-radio-group>                
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/profile" value="profiles">
+                        <md-select ng-model="edit.model.profile_id" placeholder="Perfil de Usuario" required md-no-asterisk="false">
+                            <md-option ng-repeat="profile in profiles" ng-value="profile.id">{{profile.name}}</md-option>
+                        </md-select>
+                    </ajax-get>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/type" value="types">
+                        <md-select ng-model="edit.model.type_id" placeholder="Tipo de usuario" required md-no-asterisk="false">
+                            <md-option ng-repeat="type in types" value="{{type.id}}">{{type.type}}</md-option>
+                        </md-select>
+                    </ajax-get>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/state" value="states">
+                        <md-select ng-model="edit.model.state_id" placeholder="Estado de usuario" required md-no-asterisk="false">
+                            <md-option ng-repeat="state in states" value="{{state.id}}">{{state.state}}</md-option>
+                        </md-select>
+                    </ajax-get>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input type="text" id="authKey" ng-model="edit.model.authKey">
+                    <label for="authKey">Llave de autenticacion</label>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <input type="text" id="accessToken" ng-model="edit.model.accessToken">
+                    <label for="accessToken">Token de acceso</label>
+                </md-input-container>         
+                <div class="text-danger" ng-show="put.errorText"> 
+                    <ul>
+                        <li ng-repeat="error in put.errorText">
+                            {{error.message}}
+                        </li>
+                    </ul>
                 </div>
-                <span ng-show="edit.cachedModel" style="color: red">Tiene cache</span>
-                <!--<show-errors value="put.errorText" />-->
+                <div class="md-form">
+                    <a ng-click="put.accept()" class="btn btn-success-outline btn-lg btn-block waves-effect"><i class="fa fa-check-circle left"></i> Actualizar</a>
+                    <a ng-click="put.close()" class="btn btn-danger-outline btn-lg btn-block waves-effect"><i class="fa fa-times-circle left"></i> Cancelar</a>
+                </div>
             </form>
         </mg-ajax>
     </mg-ajax>

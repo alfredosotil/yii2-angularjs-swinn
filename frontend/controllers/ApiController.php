@@ -21,7 +21,7 @@ class ApiController extends Controller {
         $behaviors = parent::behaviors();
         $behaviors['authenticator'] = [
             'class' => HttpBearerAuth::className(),
-            'only' => ['dashboard'],
+            'only' => ['dashboard', 'menudashboard'],
         ];
         $behaviors['contentNegotiator'] = [
             'class' => ContentNegotiator::className(),
@@ -31,10 +31,10 @@ class ApiController extends Controller {
         ];
         $behaviors['access'] = [
             'class' => AccessControl::className(),
-            'only' => ['dashboard'],
+            'only' => ['dashboard', 'menudashboard'],
             'rules' => [
                 [
-                    'actions' => ['dashboard'],
+                    'actions' => ['dashboard', 'menudashboard'],
                     'allow' => true,
                     'roles' => ['@'],
                 ],
@@ -65,15 +65,16 @@ class ApiController extends Controller {
     }
 
     public function actionDashboard() {
-//        $test = Yii::$app->db->createCommand('SELECT * FROM user')
-//            ->queryAll();
         $response = [
             'username' => Yii::$app->user->identity->username,
             'access_token' => Yii::$app->session->get('accessToken'),
+        ];
+        return $response;
+    }
+    
+    public function actionMenudashboard(){
+        $response = [
             'menu' => AppAsset::menuDashboard(),
-//            'menu' => count($test),
-//            'access_token' => Yii::$app->user->identity->password
-//            'access_token' => $hash,
         ];
         return $response;
     }

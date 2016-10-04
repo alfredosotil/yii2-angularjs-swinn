@@ -32,7 +32,7 @@ class Type extends \yii\db\ActiveRecord
         return [
             [['type', 'category', 'active'], 'required'],
             [['active'], 'integer'],
-            [['type', 'category'], 'string', 'max' => 45],
+            [['type', 'category'], 'string', 'max' => 45]
         ];
     }
 
@@ -42,10 +42,10 @@ class Type extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'type' => Yii::t('app', 'Type'),
-            'category' => Yii::t('app', 'Category'),
-            'active' => Yii::t('app', 'Active'),
+            'id' => 'ID',
+            'type' => 'Tipo',
+            'category' => 'Categoria',
+            'active' => 'Activo',
         ];
     }
 
@@ -55,14 +55,5 @@ class Type extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['type_id' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return TypeQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new TypeQuery(get_called_class());
     }
 }

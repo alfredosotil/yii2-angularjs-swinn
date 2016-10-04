@@ -18,6 +18,10 @@ angular.module('myapp', [
     'services',
     'directives'
 ])
+        .config(function ($mdAriaProvider) {
+            // Globally disables all ARIA warnings.
+            $mdAriaProvider.disableWarnings();
+        })
         .config(function (mgHttpProvider) {
             mgHttpProvider.setDefaultConfig({url: 'http://localhost/yii2-angularjs-swinn/backend/web'});
         })
@@ -81,6 +85,10 @@ angular.module('myapp', [
                 h.interceptors.push('authInterceptor');
             }])
         .run([function () {
+                // Material Select Initialization
+//                $(document).ready(function () {
+//                    $('.mdb-select').material_select();
+//                });
                 // Tooltips Initialization
                 $(function () {
                     $('[data-toggle="tooltip"]').tooltip()

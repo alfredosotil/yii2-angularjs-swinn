@@ -1,37 +1,47 @@
-<div ng-controller="ModuleCtrl" layout="column">
+<div layout="column" layout-margin layout-padding>
     <mg-ajax path="/module" options="mgCreate">
-        <h2>Crear Modulo</h2>
+        <h1 class="display-4">Crear Modulo {{create.model.label}}</h1>
         <form ng-submit="create.accept()">
-            <h2>{{create.model.label}}</h2>
-            <div layout="column">                    
-                <md-input-container class="md-block">
-                    <label>Icon</label>
-                    <input ng-model="create.model.iconfa">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Nombre</label>
-                    <input ng-model="create.model.label">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Descripcion</label>
-                    <input ng-model="create.model.description">
-                </md-input-container>
-                <md-input-container class="md-block">
-                    <label>Controlador</label>
-                    <input ng-model="create.model.controller">
-                </md-input-container>            
-                <md-input-container class="md-block"> 
-                    <md-checkbox ng-model="create.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
-                        Activo
-                    </md-checkbox>
-                </md-input-container>            
-                <md-input-container class="md-block">
-                    <label>Tipo de modulo</label>
-                    <input ng-model="create.model.type_id">
-                </md-input-container>
+            <md-input-container class="md-block">
+                <label>Icono</label>
+                <input ng-model="create.model.iconfa">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Nombre</label>
+                <input ng-model="create.model.label">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Descripcion</label>
+                <input ng-model="create.model.description">
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label>Controlador</label>
+                <input ng-model="create.model.controller">
+            </md-input-container>            
+            <md-input-container class="md-block"> 
+                <p>Activo?</p>
+                <md-checkbox class="md-primary" style="position:inherit;left:0px;visibility:visible;" ng-model="create.model.active" ng-true-value="1" ng-false-value="0" aria-label="Activo">
+                    {{ create.model.active ? 'Si':'No' }}
+                </md-checkbox>
+            </md-input-container> 
+            <md-input-container class="md-block">
+                <ajax-get path="http://localhost/yii2-angularjs-swinn/backend/web/type" value="types">
+                    <md-select ng-model="create.model.type_id" placeholder="Tipo de Modulo" required md-no-asterisk="false">
+                        <md-option ng-repeat="type in types" value="{{type.id}}">{{type.type}}</md-option>
+                    </md-select>
+                </ajax-get>
+            </md-input-container>  
+            <div class="text-danger" ng-show="create.errorText"> 
+                <ul>
+                    <li ng-repeat="error in create.errorText">
+                        {{error.message}}
+                    </li>
+                </ul>
             </div>
-        </form>
-        <md-button class="md-raised md-primary" ng-click="create.accept()">Crear</md-button>
-        <md-button class="md-raised md-accent" ng-click="create.close()">Cancelar</md-button>
+            <div class="md-form">
+                <a ng-click="create.accept()" class="btn btn-success-outline btn-lg btn-block waves-effect"><i class="fa fa-check-circle left"></i> Crear</a>
+                <a ng-click="create.close()" class="btn btn-danger-outline btn-lg btn-block waves-effect"><i class="fa fa-times-circle left"></i> Cancelar</a>
+            </div>
+        </form>        
     </mg-ajax>
 </div>

@@ -16,15 +16,32 @@ angular.module('controllers', [])
                 if (l.path() === '/dashboard') {
                     h.get('api/dashboard').success(function (data) {
                         s.dashboard = data;
-                        s.$parent.menu = data.menu;
-                        setTimeout(function () {
-                            $(".collapsible").collapsible();
-                            log.debug("collapsible");
-                        }, 2000);
                     });
                 }
                 s.pageClass = 'page-home';
                 s.captchaUrl = 'site/captcha';
+                s.dataModel = {};
+
+                s.dashboardMenu = function () {
+                    h.get('api/menudashboard').success(function (data) {
+                        if (!angular.equals(s.$parent.menu, data.menu)) {
+                            s.$parent.menu = data.menu;
+                            setTimeout(function () {
+                                $(".collapsible").collapsible();
+//                                log.debug("collapsible");
+                            }, 500);
+                        }
+                    });
+                };
+
+                s.setModel = function (val) {
+                    s.dataModel = val;
+                };
+//                search by two fields
+//                s.search = function (row) {
+//                    return (angular.lowercase(row.brand).indexOf(angular.lowercase(s.query) || '') !== -1 ||
+//                            angular.lowercase(row.model).indexOf(angular.lowercase(s.query) || '') !== -1);
+//                };
 
                 s.login = function () {
                     s.submitted = true;
@@ -32,6 +49,9 @@ angular.module('controllers', [])
                     h.post('api/login', s.loginModel).success(
                             function (data) {
                                 w.sessionStorage.access_token = data.access_token;
+                                $('#modal-login').modal('hide');
+                                s.loginModel = null;
+                                document.getElementById("login-form").reset();
                                 l.path('/dashboard').replace();
                             }).error(
                             function (data) {

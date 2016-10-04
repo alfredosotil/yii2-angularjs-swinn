@@ -35,7 +35,7 @@ class Profile extends \yii\db\ActiveRecord
             [['name', 'description', 'category', 'active'], 'required'],
             [['active'], 'integer'],
             [['name', 'category'], 'string', 'max' => 45],
-            [['description'], 'string', 'max' => 500],
+            [['description'], 'string', 'max' => 500]
         ];
     }
 
@@ -45,11 +45,11 @@ class Profile extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'name' => Yii::t('app', 'Name'),
-            'description' => Yii::t('app', 'Description'),
-            'category' => Yii::t('app', 'Category'),
-            'active' => Yii::t('app', 'Active'),
+            'id' => 'ID',
+            'name' => 'Nombre',
+            'description' => 'Descripcion',
+            'category' => 'Categoria',
+            'active' => 'Activo',
         ];
     }
 
@@ -67,14 +67,5 @@ class Profile extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::className(), ['profile_id' => 'id']);
-    }
-
-    /**
-     * @inheritdoc
-     * @return ProfileQuery the active query used by this AR class.
-     */
-    public static function find()
-    {
-        return new ProfileQuery(get_called_class());
     }
 }

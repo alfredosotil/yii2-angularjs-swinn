@@ -14,27 +14,27 @@ use Yii;
  * @property Module $module
  * @property Profile $profile
  */
-class Access extends \yii\db\ActiveRecord {
-
+class Access extends \yii\db\ActiveRecord
+{
     /**
      * @inheritdoc
      */
-    public static function tableName() {
+    public static function tableName()
+    {
         return 'access';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules() {
+    public function rules()
+    {
         return [
             [['profile_id', 'module_id'], 'required'],
-            [['profile_id', 'module_id'], 'integer'],
-            [['module_id'], 'exist', 'skipOnError' => true, 'targetClass' => Module::className(), 'targetAttribute' => ['module_id' => 'id']],
-            [['profile_id'], 'exist', 'skipOnError' => true, 'targetClass' => Profile::className(), 'targetAttribute' => ['profile_id' => 'id']],
+            [['profile_id', 'module_id'], 'integer']
         ];
     }
-
+    
     public function extraFields() {
         return ['profile', 'module'];
     }
@@ -42,34 +42,28 @@ class Access extends \yii\db\ActiveRecord {
     /**
      * @inheritdoc
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'profile_id' => Yii::t('app', 'Profile ID'),
-            'module_id' => Yii::t('app', 'Module ID'),
+            'id' => 'ID',
+            'profile_id' => 'Perfil ID',
+            'module_id' => 'Modulo ID',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getModule() {
+    public function getModule()
+    {
         return $this->hasOne(Module::className(), ['id' => 'module_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProfile() {
+    public function getProfile()
+    {
         return $this->hasOne(Profile::className(), ['id' => 'profile_id']);
     }
-
-    /**
-     * @inheritdoc
-     * @return AccessQuery the active query used by this AR class.
-     */
-    public static function find() {
-        return new AccessQuery(get_called_class());
-    }
-
 }

@@ -9,6 +9,16 @@ angular.module('directives', [])
 //                    elm.text(version);
 //                };
 //            }])
+        .directive('getDataModal', function () {
+            return {
+                restrict: 'A',
+                controller: function ($scope, $http, $attrs) {
+                    $http.get($attrs.urlDataModal).success(function (data) {
+                        $scope.data = data;
+                    });
+                }
+            };
+        })
         .directive('ajaxGet', function () {
             return {
                 restrict: 'E',

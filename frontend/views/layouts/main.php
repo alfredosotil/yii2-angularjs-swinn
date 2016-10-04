@@ -18,12 +18,12 @@ AppAsset::register($this);
         <?php $this->head() ?>
         <script>paceOptions = {ajax: {trackMethods: ['GET', 'POST']}};</script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.js"></script>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-corner-indicator.css" rel="stylesheet" />
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/red/pace-theme-minimal.css" rel="stylesheet" />
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
     </head>
-    <body  ng-controller="SiteCtrl" class="fixed-sn mdb-skin">
+    <body  ng-controller="SiteCtrl" class="fixed-sn dark-skin">
         <?php $this->beginBody() ?>
         <!--Double navigation-->
         <header>
@@ -73,37 +73,6 @@ AppAsset::register($this);
                                 </ul>
                             </div>
                         </li>
-                        <!--                        <li>
-                                                    <a class="collapsible-header waves-effect arrow-r"><i class="fa fa-hand-pointer-o"></i> Instruction<i class="fa fa-angle-down rotate-icon"></i></a>
-                                                    <div class="collapsible-body">
-                                                        <ul>
-                                                            <li><a href="#" class="waves-effect">For bloggers</a>
-                                                            </li>
-                                                            <li><a href="#" class="waves-effect">For authors</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-eye"></i> About<i class="fa fa-angle-down rotate-icon"></i></a>
-                                                    <div class="collapsible-body">
-                                                        <ul>
-                                                            <li><a href="#" class="waves-effect">Introduction</a>
-                                                            </li>
-                                                            <li><a href="#" class="waves-effect">Monthly meetings</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li><a class="collapsible-header waves-effect arrow-r"><i class="fa fa-envelope-o"></i> Contact me<i class="fa fa-angle-down rotate-icon"></i></a>
-                                                    <div class="collapsible-body">
-                                                        <ul>
-                                                            <li><a href="#" class="waves-effect">FAQ</a>
-                                                            </li>
-                                                            <li><a href="#" class="waves-effect">Write a message</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </li>-->
                     </ul>
                 </li>
                 <!--/. Side navigation links -->
@@ -112,11 +81,11 @@ AppAsset::register($this);
             <!--/. Sidebar navigation -->
 
             <!--Navbar-->
-            <nav class="navbar navbar-fixed-top scrolling-navbar double-nav">
+            <nav class="navbar navbar-dark navbar-fixed-top scrolling-navbar double-nav">
 
                 <!-- SideNav slide-out button -->
                 <div class="pull-left" ng-show="loggedIn()">
-                    <button data-activates="slide-out" class="navbar-toggler button-collapse"><i class="fa fa-bars"></i></button>
+                    <button data-activates="slide-out" class="navbar-toggler button-collapse" ng-click="dashboardMenu()"><i class="fa fa-bars"></i></button>
                 </div>
 
                 <!--Collapse button-->
@@ -146,10 +115,10 @@ AppAsset::register($this);
                                 <a class="nav-link" href="#/contact">Contacto</a>
                             </li>  
                             <li class="nav-item pull-right" ng-hide="loggedIn()">
-                                <a class="nav-link" href="#/login"><i class="fa fa-sign-in" aria-hidden="false"></i><span class="hidden-sm-down"> Iniciar Sesion</span></a>
+                                <a class="nav-link btn btn-success-outline waves-effect" data-toggle="modal" data-target="#modal-login"><i class="fa fa-sign-in" aria-hidden="false"></i><span class="hidden-sm-down"> Iniciar Sesion</span></a>
                             </li>   
                             <li class="nav-item pull-right" ng-show="loggedIn()">
-                                <a class="nav-link" href="" ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="false"></i><span class="hidden-sm-down"> Salir</span></a>
+                                <a class="nav-link btn btn-danger-outline waves-effect" href="" ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="false"></i><span class="hidden-sm-down"> Salir</span></a>
                             </li>   
                         </ul>
                     </div>
@@ -186,8 +155,8 @@ AppAsset::register($this);
                         <ul>
                             <li><a href="#!">Link 1</a></li>
                             <li><a href="#!">Link 2</a></li>
-                            <li><a href="#!">Link 3</a></li>
-                            <li><a href="#!">Link 4</a></li>
+                            <!--<li><a href="#!">Link 3</a></li>-->
+                            <!--<li><a href="#!">Link 4</a></li>-->
                         </ul>
                     </div>
                     <!--/.Second column-->
@@ -195,7 +164,7 @@ AppAsset::register($this);
                     <hr class="hidden-md-up">
 
                     <!--Third column-->
-                    <div class="col-md-2">
+<!--                    <div class="col-md-2">
                         <h5 class="title">Links</h5>
                         <ul>
                             <li><a href="#!">Link 1</a></li>
@@ -203,13 +172,13 @@ AppAsset::register($this);
                             <li><a href="#!">Link 3</a></li>
                             <li><a href="#!">Link 4</a></li>
                         </ul>
-                    </div>
+                    </div>-->
                     <!--/.Third column-->
 
                     <hr class="hidden-md-up">
 
                     <!--Fourth column-->
-                    <div class="col-md-2">
+<!--                    <div class="col-md-2">
                         <h5 class="title">Links</h5>
                         <ul>
                             <li><a href="#!">Link 1</a></li>
@@ -217,7 +186,7 @@ AppAsset::register($this);
                             <li><a href="#!">Link 3</a></li>
                             <li><a href="#!">Link 4</a></li>
                         </ul>
-                    </div>
+                    </div>-->
                     <!--/.Fourth column-->
 
                 </div>
@@ -243,11 +212,11 @@ AppAsset::register($this);
                 <ul>
                     <li><a class="btn-floating btn-small btn-fb"><i class="fa fa-facebook"> </i></a></li>
                     <li><a class="btn-floating btn-small btn-tw"><i class="fa fa-twitter"> </i></a></li>
-                    <li><a class="btn-floating btn-small btn-gplus"><i class="fa fa-google-plus"> </i></a></li>
+                    <!--<li><a class="btn-floating btn-small btn-gplus"><i class="fa fa-google-plus"> </i></a></li>-->
                     <li><a class="btn-floating btn-small btn-li"><i class="fa fa-linkedin"> </i></a></li>
-                    <li><a class="btn-floating btn-small btn-git"><i class="fa fa-github"> </i></a></li>
-                    <li><a class="btn-floating btn-small btn-pin"><i class="fa fa-pinterest"> </i></a></li>
-                    <li><a class="btn-floating btn-small btn-ins"><i class="fa fa-instagram"> </i></a></li>
+                    <!--<li><a class="btn-floating btn-small btn-git"><i class="fa fa-github"> </i></a></li>-->
+                    <!--<li><a class="btn-floating btn-small btn-pin"><i class="fa fa-pinterest"> </i></a></li>-->
+                    <!--<li><a class="btn-floating btn-small btn-ins"><i class="fa fa-instagram"> </i></a></li>-->
                 </ul>
             </div>
             <!--/.Social buttons-->
@@ -262,15 +231,62 @@ AppAsset::register($this);
             <!--/.Copyright-->
 
         </footer>
-        <!--/.Footer-->
-        <!--        <footer class="footer">
-                    <div class="container">
-                        <p class="pull-left">&copy; Rubik Cube Ideas - better solutions <?= date('Y') ?></p>
-        
-                        <p class="pull-right"><?= Yii::powered() ?></p>
-                    </div>
-                </footer>-->
+        <!-- Modal Login -->
+        <div class="modal fade modal-ext" id="modal-login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content">
 
+                    <!--Header-->
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3><i class="fa fa-user"></i> Inicia Sesion</h3>
+                    </div>
+
+                    <!--Body-->
+                    <div class="modal-body">
+                        <form ng-submit="login()" name="loginForm" id="login-form" method="post" role="form" autocomplete="off">
+                            <div class="md-form" ng-class="{ 'has-success': !error['username'] && submitted, 'text-danger': error['username'] && submitted }">
+                                <i class="fa fa-envelope prefix"></i>
+                                <input id="loginform-username" ng-model="loginModel.username" type="text" class="form-control">
+                                <label for="loginform-username">Tu usuario</label>
+                                <p class="help-block help-block-error">{{ error['username']}}</p>
+                            </div>
+
+                            <div class="md-form" ng-class="{ 'has-success': !error['password'] && submitted, 'text-danger': error['password'] && submitted }">
+                                <i class="fa fa-lock prefix"></i>
+                                <input id="loginform-password" type="password" ng-model="loginModel.password" class="form-control">
+                                <label for="loginform-password">Tu clave</label>
+                                <p class="help-block help-block-error">{{ error['password']}}</p>
+                            </div>
+
+                            <div class="md-form ">
+                                <fieldset class="form-group">
+                                    <input id="loginform-rememberme" class="fix-checkbox" type="checkbox" ng-model="loginModel.rememberMe">
+                                    <label for="loginform-rememberme">recuerdame...</label>
+                                </fieldset>
+                            </div>
+                            <div class="text-xs-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Iniciar</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!--Footer-->
+                    <div class="modal-footer">
+                        <!--                        <div class="options">
+                                                    <p>Not a member? <a href="#">Sign Up</a></p>
+                                                    <p>Forgot <a href="#">Password?</a></p>
+                                                </div>-->
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!--/.Footer-->
         <?php $this->endBody() ?>
     </body>
 </html>
